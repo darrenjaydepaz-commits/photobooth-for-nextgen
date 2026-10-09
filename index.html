@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061640">
+  <title>NEXTGEN Smart Classroom Photobooth</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PAGE 1: WELCOME -->
+  <section id="welcomePage" class="page welcome-page active">
+    <div class="welcome-glow"></div>
+
+    <div class="welcome-content">
+      <div class="welcome-logo">
+        <img src="./NEXTGEN%20LOGO.jpg" alt="NEXTGEN Logo">
+      </div>
+
+      <p class="eyebrow">INNOVATION TEAM PRESENTS</p>
+      <h1>NEXTGEN<br><span>PHOTOBOOTH</span></h1>
+      <p class="welcome-subtitle">
+        Capture the moment. Keep it forever.
+      </p>
+
+      <div class="welcome-divider"></div>
+
+      <p class="welcome-description">
+        Create memories, express your creativity, and make every
+        picture unforgettable.
+      </p>
+
+      <button id="enterBooth" class="button welcome-button">
+        START NOW <span>→</span>
+      </button>
+
+      <div class="welcome-features">
+        <span>📸 TAKE PHOTOS</span>
+        <span>✨ EDIT MEMORIES</span>
+        <span>💙 KEEP FOREVER</span>
+      </div>
+    </div>
+
+    <footer class="welcome-footer">
+      NEXTGEN SMART CLASSROOM · POWERED BY INNOVATION
+    </footer>
+  </section>
+
+
+  <!-- PAGE 2: PHOTOBOOTH -->
+  <section id="boothPage" class="page">
+    <header class="header">
+      <button class="back-home" data-page="welcomePage">
+        ← HOME
+      </button>
+
+      <div class="brand-label">
+        <div class="brand-symbol">
+          <img src="./NEXTGEN%20LOGO.jpg" alt="NEXTGEN Logo">
+        </div>
+        <span>NEXTGEN SMART CLASSROOM</span>
+      </div>
+
+      <p class="eyebrow">INNOVATION TEAM PRESENTS</p>
+      <h1>Instant Memories.</h1>
+      <p class="subtitle">Capture the moment. Keep it forever.</p>
+      <div class="header-line"></div>
+
+      <div class="page-indicator">
+        <span class="step active">01 WELCOME</span>
+        <span class="step active">02 PHOTOBOOTH</span>
+        <span class="step">03 EDITOR</span>
+      </div>
+    </header>
+
+    <main class="booth">
+      <section class="camera-section">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <div>
+            <h2>Photo Studio</h2>
+            <p>Choose your layout and strike a pose.</p>
+          </div>
+        </div>
+
+        <div class="camera-frame">
+          <video id="camera" autoplay playsinline muted></video>
+          <div id="countdown" class="countdown hidden">3</div>
+          <div id="flash" class="flash hidden"></div>
+
+          <div id="cameraPlaceholder" class="placeholder">
+            <span class="camera-icon">◎</span>
+            <h3>Your memories start here</h3>
+            <p>Allow camera access to begin.</p>
+            <button id="startCamera" class="button primary">
+              Start Camera
+            </button>
+          </div>
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite">
+          Ready when you are.
+        </p>
+
+        <div class="grid-selector">
+          <div class="grid-heading">
+            <label>CHOOSE YOUR PHOTO LAYOUT</label>
+            <span class="selection-hint">SELECT ONE</span>
+          </div>
+
+          <div class="grid-options" role="group" aria-label="Photo layout">
+            <button type="button" class="grid-option"
+                    data-count="1" aria-pressed="false">
+              <span class="grid-icon one-grid"><i></i></span>
+              <strong>1 Photo</strong>
+              <small>Single shot</small>
+            </button>
+
+            <button type="button" class="grid-option"
+                    data-count="2" aria-pressed="false">
+              <span class="grid-icon two-grid"><i></i><i></i></span>
+              <strong>2 Photos</strong>
+              <small>Photo strip</small>
+            </button>
+
+            <button type="button" class="grid-option selected"
+                    data-count="4" aria-pressed="true">
+              <span class="grid-icon four-grid">
+                <i></i><i></i><i></i><i></i>
+              </span>
+              <strong>4 Photos</strong>
+              <small>2 × 2 collage</small>
+            </button>
+
+            <button type="button" class="grid-option"
+                    data-count="6" aria-pressed="false">
+              <span class="grid-icon six-grid">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </span>
+              <strong>6 Photos</strong>
+              <small>Photo collage</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="countdown-selector">
+          <div class="grid-heading">
+            <label>COUNTDOWN TIMER</label>
+            <span class="selection-hint">CHOOSE YOUR TIME</span>
+          </div>
+
+          <div class="countdown-options" role="group"
+               aria-label="Countdown duration">
+            <button type="button" class="timer-option selected"
+                    data-seconds="3" aria-pressed="true">
+              <strong>3</strong><span>SECONDS</span>
+            </button>
+            <button type="button" class="timer-option"
+                    data-seconds="6" aria-pressed="false">
+              <strong>6</strong><span>SECONDS</span>
+            </button>
+            <button type="button" class="timer-option"
+                    data-seconds="9" aria-pressed="false">
+              <strong>9</strong><span>SECONDS</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="progress-info">
+          <span id="gridStatus">Photo 1 of 4</span>
+          <span id="progressPercent">0% complete</span>
+        </div>
+
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div class="camera-controls">
+          <button id="retake" class="button secondary" disabled>
+            Start Over
+          </button>
+
+          <button id="capture"
+                  class="button secondary capture-button" disabled>
+            <span class="shutter"></span>
+            Start Photo Session
+          </button>
+
+          <button id="cancelSession"
+                  class="button cancel-button hidden">
+            Cancel Session
+          </button>
+        </div>
+
+        <p class="helper-text">
+          Get into position! Photos will be captured automatically.
+        </p>
+      </section>
+
+
+      <!-- PHOTO PRINT PREVIEW -->
+      <section class="preview-section">
+        <div class="section-heading">
+          <span class="section-number cyan">02</span>
+          <div>
+            <h2>Your Photo Print</h2>
+            <p>Memories in an Instax-inspired frame.</p>
+          </div>
+        </div>
+
+        <div class="film">
+          <div class="film-brand">
+            <div class="mini-logo">
+              <img src="./NEXTGEN%20LOGO.jpg" alt="NEXTGEN Logo">
+            </div>
+
+            <div class="film-brand-text">
+              <strong>NEXTGEN</strong>
+              <span>SMART CLASSROOM</span>
+            </div>
+
+            <span class="film-badge">INSTANT</span>
+          </div>
+
+          <div class="film-image">
+            <img id="preview" alt="Your completed photo collage">
+
+            <div id="previewPlaceholder" class="preview-placeholder">
+              <span>✦</span>
+              <p>Your photo will appear here</p>
+            </div>
+          </div>
+
+          <div class="film-caption">
+            <p id="photoCaption">a moment to remember ♡</p>
+            <span id="photoDate"></span>
+          </div>
+
+          <div class="film-footer">
+            <span>INNOVATION TEAM</span>
+            <span>✦ ONE FRAME AT A TIME</span>
+          </div>
+        </div>
+
+        <div class="print-controls">
+          <label for="captionInput">PHOTO CAPTION</label>
+
+          <input id="captionInput" type="text" maxlength="45"
+                 placeholder="Write your own caption..."
+                 value="a moment to remember ♡">
+
+          <button id="print" class="button print-button" disabled>
+            Print My Photo ↗
+          </button>
+
+          <button id="download"
+                  class="button secondary download-button" disabled>
+            Download Photo
+          </button>
+
+          <button id="openEditor" class="button editor-button" disabled>
+            ✨ Edit My Photo
+          </button>
+        </div>
+
+        <p class="print-note">Designed for 4 × 6 inch photo paper.</p>
+      </section>
+    </main>
+
+    <canvas id="canvas" hidden></canvas>
+
+    <div id="printArea" aria-hidden="true">
+      <div class="print-film">
+        <div class="print-brand">
+          <div class="print-logo">
+            <img src="./NEXTGEN%20LOGO.jpg" alt="NEXTGEN Logo">
+          </div>
+
+          <div class="print-brand-text">
+            <strong>NEXTGEN</strong>
+            <small>SMART CLASSROOM</small>
+          </div>
+        </div>
+
+        <img id="printImage" alt="Photo collage for printing">
+
+        <div class="print-caption">
+          <span id="printCaption">a moment to remember ♡</span>
+          <small id="printDate"></small>
+        </div>
+
+        <div class="print-footer">
+          INNOVATION TEAM · ONE FRAME AT A TIME
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-circuit">━━━━●━━━━━━━━●━━━━</div>
+      <p>NEXTGEN SMART CLASSROOM</p>
+      <span>MADE WITH CREATIVITY · POWERED BY INNOVATION</span>
+    </footer>
+  </section>
+
+
+  <!-- PAGE 3: PHOTO EDITOR -->
+  <section id="editorPage" class="page editor-page">
+    <header class="header editor-header">
+      <button class="back-home" data-page="boothPage">
+        ← BACK TO PHOTOBOOTH
+      </button>
+
+      <div class="brand-label">
+        <div class="brand-symbol">
+          <img src="./NEXTGEN%20LOGO.jpg" alt="NEXTGEN Logo">
+        </div>
+        <span>NEXTGEN SMART CLASSROOM</span>
+      </div>
+
+      <p class="eyebrow">YOUR CREATIVITY, YOUR RULES</p>
+      <h1>Make It Yours.</h1>
+      <p class="subtitle">Add stickers, explore filters, and create your masterpiece.</p>
+      <div class="header-line"></div>
+
+      <div class="page-indicator">
+        <span class="step active">01 WELCOME</span>
+        <span class="step active">02 PHOTOBOOTH</span>
+        <span class="step active">03 EDITOR</span>
+      </div>
+    </header>
+
+    <main class="editor-layout">
+      <section class="editor-workspace">
+        <div class="section-heading">
+          <span class="section-number cyan">03</span>
+          <div>
+            <h2>Photo Editor</h2>
+            <p>Tap a sticker to add it to your photo.</p>
+          </div>
+        </div>
+
+        <div class="editor-canvas-wrap" id="editorCanvasWrap">
+          <canvas id="editorCanvas" width="900" height="1050"></canvas>
+          <div id="editorEmpty" class="editor-empty">
+            <span>📸</span>
+            <h3>Your masterpiece goes here</h3>
+            <p>Take photos in the Photo Studio first.</p>
+            <button class="button primary" data-page="boothPage">
+              Go to Photo Studio
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-actions">
+          <button id="undoSticker" class="button secondary">
+            ↶ Undo Sticker
+          </button>
+          <button id="clearStickers" class="button secondary">
+            Remove Stickers
+          </button>
+        </div>
+
+        <p id="editorStatus" class="status" role="status" aria-live="polite">
+          Choose a filter or add some stickers!
+        </p>
+      </section>
+
+
+      <!-- EDITING TOOLS -->
+      <aside class="editor-tools">
+        <div class="tool-panel">
+          <h3>🎨 Photo Filters</h3>
+          <p class="tool-description">Choose your favorite look.</p>
+
+          <div class="filter-grid">
+            <button class="filter-option selected" data-filter="normal">
+              <span class="filter-swatch normal-swatch">Aa</span>
+              <span>Original</span>
+            </button>
+
+            <button class="filter-option" data-filter="grayscale">
+              <span class="filter-swatch gray-swatch">Aa</span>
+              <span>B&W</span>
+            </button>
+
+            <button class="filter-option" data-filter="sepia">
+              <span class="filter-swatch sepia-swatch">Aa</span>
+              <span>Vintage</span>
+            </button>
+
+            <button class="filter-option" data-filter="warm">
+              <span class="filter-swatch warm-swatch">Aa</span>
+              <span>Warm</span>
+            </button>
+
+            <button class="filter-option" data-filter="cool">
+              <span class="filter-swatch cool-swatch">Aa</span>
+              <span>Cool</span>
+            </button>
+
+            <button class="filter-option" data-filter="vivid">
+              <span class="filter-swatch vivid-swatch">Aa</span>
+              <span>Vivid</span>
+            </button>
+
+            <button class="filter-option" data-filter="soft">
+              <span class="filter-swatch soft-swatch">Aa</span>
+              <span>Soft</span>
+            </button>
+
+            <button class="filter-option" data-filter="dreamy">
+              <span class="filter-swatch dreamy-swatch">Aa</span>
+              <span>Dreamy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="tool-panel">
+          <h3>☀️ Adjustments</h3>
+
+          <label class="range-label" for="brightness">
+            Brightness <span id="brightnessValue">100%</span>
+          </label>
+          <input id="brightness" type="range"
+                 min="50" max="150" value="100">
+
+          <label class="range-label" for="contrast">
+            Contrast <span id="contrastValue">100%</span>
+          </label>
+          <input id="contrast" type="range"
+                 min="50" max="150" value="100">
+
+          <label class="range-label" for="saturation">
+            Saturation <span id="saturationValue">100%</span>
+          </label>
+          <input id="saturation" type="range"
+                 min="0" max="200" value="100">
+
+          <button id="resetAdjustments" class="button secondary full-button">
+            Reset Adjustments
+          </button>
+        </div>
+
+        <div class="tool-panel">
+          <h3>✨ Emoji Stickers</h3>
+          <p class="tool-description">
+            Select an emoji to place it on your photo.
+          </p>
+
+          <div class="sticker-grid">
+            <button class="sticker-option" data-emoji="❤️">❤️</button>
+            <button class="sticker-option" data-emoji="😍">😍</button>
+            <button class="sticker-option" data-emoji="🥰">🥰</button>
+            <button class="sticker-option" data-emoji="✨">✨</button>
+            <button class="sticker-option" data-emoji="⭐">⭐</button>
+            <button class="sticker-option" data-emoji="💖">💖</button>
+            <button class="sticker-option" data-emoji="🌸">🌸</button>
+            <button class="sticker-option" data-emoji="🦋">🦋</button>
+            <button class="sticker-option" data-emoji="🌈">🌈</button>
+            <button class="sticker-option" data-emoji="☁️">☁️</button>
+            <button class="sticker-option" data-emoji="😎">😎</button>
+            <button class="sticker-option" data-emoji="🎀">🎀</button>
+            <button class="sticker-option" data-emoji="🎉">🎉</button>
+            <button class="sticker-option" data-emoji="💙">💙</button>
+            <button class="sticker-option" data-emoji="🔥">🔥</button>
+            <button class="sticker-option" data-emoji="👑">👑</button>
+          </div>
+
+          <label class="range-label" for="stickerSize">
+            Sticker size <span id="stickerSizeValue">64px</span>
+          </label>
+          <input id="stickerSize" type="range"
+                 min="28" max="120" value="64">
+
+          <p class="tool-description">
+            Tip: Click a sticker, then click your photo to place it.
+          </p>
+        </div>
+
+        <div class="tool-panel text-overlay-panel">
+          <h3>🔤 Add Text to Photo</h3>
+          <p class="tool-description">Add text anywhere on your photo, then customize its appearance.</p>
+
+          <label class="range-label" for="overlayTextInput">Text</label>
+          <input id="overlayTextInput" class="editor-caption-input" type="text" maxlength="80" placeholder="Type something...">
+          <button id="addOverlayText" class="button editor-button full-button">＋ Add Text</button>
+
+          <label class="range-label" for="overlayTextSelect">Selected text</label>
+          <select id="overlayTextSelect" class="editor-select">
+            <option value="">No text selected</option>
+          </select>
+
+          <label class="range-label" for="overlayFont">Font family</label>
+          <select id="overlayFont" class="editor-select">
+            <option value="Arial">Arial</option>
+            <option value="Georgia">Georgia</option>
+            <option value="'Times New Roman'">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="'Trebuchet MS'">Trebuchet MS</option>
+            <option value="'Courier New'">Courier New</option>
+            <option value="cursive">Cursive</option>
+          </select>
+
+          <label class="range-label" for="overlayFontStyle">Font style</label>
+          <select id="overlayFontStyle" class="editor-select">
+            <option value="normal">Regular</option>
+            <option value="bold">Bold</option>
+            <option value="italic">Italic</option>
+            <option value="bold italic">Bold Italic</option>
+          </select>
+
+          <label class="range-label" for="overlayTextColor">Text color</label>
+          <input id="overlayTextColor" class="editor-color-input" type="color" value="#ffffff">
+
+          <label class="range-label" for="overlayTextSize">Text size <span id="overlayTextSizeValue">48px</span></label>
+          <input id="overlayTextSize" type="range" min="18" max="120" value="48">
+
+          <div class="text-tool-actions">
+            <button id="updateOverlayText" class="button secondary">Apply Changes</button>
+            <button id="deleteOverlayText" class="button secondary">Delete Text</button>
+          </div>
+          <p class="tool-description">Tip: Add or select text, then click the photo to reposition it.</p>
+        </div>
+
+        <div class="tool-panel">
+          <h3>📝 Photo Caption</h3>
+          <input id="editorCaption" class="editor-caption-input"
+                 type="text" maxlength="45"
+                 placeholder="Write a caption...">
+
+          <button id="applyEditorCaption" class="button secondary full-button">
+            Update Caption
+          </button>
+        </div>
+
+        <div class="tool-panel editor-export">
+          <h3>💾 Save Your Masterpiece</h3>
+
+          <button id="saveEditedPhoto" class="button editor-button full-button">
+            Download Edited Photo
+          </button>
+
+          <button id="printEditedPhoto" class="button print-button full-button">
+            Print Edited Photo
+          </button>
+
+          <button id="resetEditor" class="button secondary full-button">
+            Reset All Edits
+          </button>
+
+          <button class="button secondary full-button" data-page="boothPage">
+            ← Back to Photo Booth
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-circuit">━━━━●━━━━━━━━●━━━━</div>
+      <p>NEXTGEN SMART CLASSROOM</p>
+      <span>MADE WITH CREATIVITY · POWERED BY INNOVATION</span>
+    </footer>
+  </section>
+
+
+  <!-- HIDDEN PRINT TEMPLATE FOR EDITOR -->
+  <div id="editorPrintArea">
+    <img id="editorPrintImage" alt="Edited photo">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
